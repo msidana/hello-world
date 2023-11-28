@@ -1,0 +1,28 @@
+description: Heat template to create a VM with attached volume
+heat_template_version: rocky
+parameters:
+  flavor_name:
+    default: c2.small
+    type: string
+  image_name:
+    default: ROCKY_8
+    type: string
+  network_name:
+    default: ec18ca37-30f4-4ada-99fb-177d362aca0c
+    type: string
+  vm_name:
+    default: stack-vm-demo001
+    type: string
+resources:
+  my_instance:
+    properties:
+      flavor:
+        get_param: flavor_name
+      image:
+        get_param: image_name
+      name:
+        get_param: vm_name
+      networks:
+      - network:
+          get_param: network_name
+    type: OS::Nova::Server
